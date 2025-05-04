@@ -1,0 +1,518 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Freight Big Pro";
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/* As we are suing locomotive so noe height width for the parent */
+#main {
+  /* width: 100%;
+    height: 100%; */
+  background-color: #000;
+}
+
+#loader {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  position: fixed;
+  /* center the text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+#loader h1 {
+  text-align: center;
+  font-size: 7vw;
+  line-height: 5.02vw;
+  letter-spacing: -0.21vw;
+  font-weight: 100;
+  color: #fff;
+  position: relative;
+  z-index: 8;
+  /* opacity: 0; */
+}
+
+#loader video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  /* this to get it above the yellow div but below the text as z index of text */
+  z-index: 6;
+}
+
+/* Z index order
+    - video
+    - yellow div 2
+    - loader h1
+    - yellow div 1 */
+
+#yellow-div1 {
+  height: 100%;
+  width: 100%;
+  background-color: #f5e319;
+  position: absolute;
+  /* so it comes on the top */
+  z-index: 9;
+}
+
+#yellow-div2 {
+  height: 100%;
+  width: 100%;
+  background-color: #f5e319;
+  position: absolute;
+  /* so it comes on the top */
+  z-index: 7;
+}
+
+#nav {
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  padding: 2.43vw 4.16vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#nav-links {
+  width: 28.125vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3.4vw;
+  transition: all 0.7s ease;
+  opacity: 0;
+}
+
+#nav-links h3 {
+  color: #fff;
+  font-size: 1.11vw;
+  line-height: 2.111vw;
+  font-family: "Mona Sans";
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.7s ease;
+  position: relative;
+}
+
+#nav-links h3::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  background-color: #000;
+  height: 0.069vw;
+  left: 10%;
+  /* for the center underline effect */
+  bottom: 0vw;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  /* imp transition */
+  width: 0;
+}
+
+#nav-links h3:hover::after {
+  width: 100%;
+  left: 0%;
+}
+
+#toggle-icon {
+  font-size: 2.27vw;
+  color: #fff;
+  font-family: "Mona Sans";
+  cursor: pointer;
+  transition: all 0.7s ease;
+  margin-left: 0;
+}
+
+/* Default order for the elements */
+#projects {
+  order: 1;
+}
+
+#about {
+  order: 2;
+}
+
+#studies {
+  order: 3;
+}
+
+#toggle-icon {
+  order: 4;
+}
+
+/* Styles when nav-links is collapsed */
+#nav-links.collapsed h3#about,
+#nav-links.collapsed h3#studies {
+  opacity: 0;
+  /* Makes the text invisible */
+  width: 0;
+  /* Collapses the width */
+  margin: 0;
+  /* Removes the margin */
+  overflow: hidden;
+  /* Ensures content doesn't overflow */
+  transform-origin: left;
+  transition: transform 0.7s ease;
+}
+
+/* Changes the order of 'PROJECTS' when collapsed */
+#nav-links.collapsed h3#projects {
+  order: 4;
+  transform-origin: right;
+  transition: transform 1s ease;
+}
+
+/* Rotates the icon when nav-links is collapsed */
+#toggle-icon.collapsed {
+  transform: rotate(45deg);
+}
+
+#nav svg {
+  display: none;
+}
+
+#page1 {
+  height: 100vh;
+  width: 100%;
+  background-color: #f5e319;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+/* this is pseudo div just to create spacing */
+#page1 #page1-top {
+  height: 13vh;
+  width: 100%;
+  /* background-color: maroon; */
+}
+
+#page1 #page1-upper {
+  height: 70vh;
+  width: 100%;
+  /* background-color: palevioletred; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#page1 #page1-upper h1 {
+  text-align: center;
+  font-size: 7vw;
+  line-height: 5.02vw;
+  letter-spacing: -0.21vw;
+  font-weight: 100;
+}
+
+#page1 #page1-bottom {
+  height: 13vh;
+  width: 100%;
+  /* background-color: burlywood; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.43vw 4.16vw;
+  transition: all 0.7s ease-in;
+}
+
+#page1 #page1-bottom h3 {
+  font-size: 1.11vw;
+  line-height: 2.111vw;
+  font-family: "Mona Sans";
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.7s ease-in;
+  opacity: 0;
+  /* To position the underline */
+  position: relative;
+}
+
+#page1 #page1-bottom h3::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  background-color: #000;
+  height: 0.069vw;
+  left: 10%;
+  /* for the center underline effect */
+  bottom: 0vw;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  /* imp transition */
+  width: 0;
+}
+
+#page1 #page1-bottom h3:hover::after {
+  width: 100%;
+  left: 0%;
+}
+
+#page1 #page1-bottom i {
+  font-size: 3vw;
+  font-weight: lighter;
+  transition: all 0.7s ease-in;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#page2 {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  /* these 3 are for the image on hover effect */
+  background-size: cover;
+  background-position: center;
+  transition: all ease 0.6s;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  /* to align in column form */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.elem {
+  /* background-color: red; */
+  padding: 0.6vw 0;
+  width: 100%;
+  position: relative;
+  /* to control the banners */
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
+}
+
+.elem h2 {
+  font-size: 7vw;
+  line-height: 5.02vw;
+  letter-spacing: -0.21vw;
+  font-weight: 100;
+  position: relative;
+  z-index: 9;
+  cursor: pointer;
+}
+
+.elem .moving {
+  background-color: #f5e319;
+  width: 100%;
+  white-space: nowrap;
+  padding: 0.556vw 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -40%) scaleY(0);
+  /* scaleY to scale the size in transform function */
+  transition: all 0.4s ease;
+  overflow: hidden;
+  /* to contain the outgoing box shadow */
+}
+
+.elem .moving .blur {
+  position: absolute;
+  height: 98%;
+  width: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  /* As the h2 has 9 so it'll just behind it but above the banner text */
+  background: linear-gradient(#f5e319d2, #f5e319, #f5e319, #f5e319, #f5e319d2);
+  box-shadow: 0.69vw 0vw 1.38vw 1.38vw #f5e319,
+    -0.69vw 0vw 1.38vw 1.38vw #f5e319;
+  /* 4th value is of spread */
+}
+
+.elem .moving .moving-in {
+  display: inline-block;
+  white-space: nowrap;
+  /* to make them in one line */
+  animation-name: moving-banner;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.elem .moving .moving-in h5 {
+  color: #000;
+  display: inline-block;
+  font-size: 1.2vw;
+  font-family: "Mona Sans";
+  font-weight: 400;
+  margin-right: 2.7vw;
+  opacity: 0;
+  transition-delay: 0.3s;
+  transition: all 0.3s ease;
+  /* for cooler animation effect */
+}
+
+.elem h2:hover {
+  font-style: italic;
+  color: #000;
+}
+
+.elem:hover .moving {
+  transform: translate(0, -40%) scaleY(1);
+}
+
+.elem:hover .moving h5 {
+  opacity: 1;
+}
+
+@keyframes moving-banner {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#page3 {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #fff;
+}
+
+.image-container {
+  padding: 1.944vw 2.083vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.image-div {
+  width: 30.6vw;
+  height: 38.3vw;
+  position: relative;
+  overflow: hidden;
+  /* this is when we scale up the image on hover */
+  margin-bottom: 1.944vw;
+  cursor: pointer;
+}
+
+.image-div .overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #0000001c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+.image-div .overlay p {
+  font-size: 3.472vw;
+  line-height: 2.778vw;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.image-div img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+}
+
+.image-div:hover img {
+  scale: 1.1;
+}
+
+.image-div:hover .overlay {
+  background-color: #000;
+}
+
+.image-div:hover .overlay p {
+  opacity: 1;
+}
+
+#page4 {
+  height: 30vh;
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+#page4 #footer-up {
+  margin-top: -0.2vw;
+  height: 17vh;
+  width: 100%;
+  background-color: white;
+  padding-bottom: 2.083vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2vw;
+}
+
+#page4 #footer-up i {
+  font-size: 3vw;
+  font-weight: lighter;
+}
+
+#page4 #footer-up h3 {
+  font-family: "Mona Sans";
+  font-size: 1.1vw;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+#page4 #footer-down {
+  height: 13vh;
+  width: 100%;
+  padding: 3.12vw 4.16vw;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#page4 #footer-down #footer-down-right {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#page4 #footer-down h3 {
+  font-family: "Mona Sans";
+  font-size: 1.1vw;
+  font-weight: 300;
+  color: white;
+  position: relative;
+  cursor: pointer;
+}
+
+#page4 #footer-down h3::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  height: 0.069vw;
+  left: 50%;
+  /* for the center underline effect */
+  bottom: -0.139vw;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  /* imp transition */
+  width: 0;
+}
+
+#page4 #footer-down h3:hover::after {
+  width: 100%;
+  left: 0%;
+}
