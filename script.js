@@ -5,6 +5,50 @@ var toggleIcon = document.querySelector("#toggle-icon");
 var navLinks = document.querySelector("#nav-links");
 var arrowDown = document.querySelector("#page1-bottom i");
 
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    htmlElement.setAttribute('data-theme', savedTheme);
+}
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? null : 'light';
+    
+    if (newTheme) {
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    } else {
+        htmlElement.removeAttribute('data-theme');
+        localStorage.removeItem('theme');
+    }
+});
+
+// Progressive image loading
+function handleImageLoading() {
+    const images = document.querySelectorAll('.image-div img');
+    
+    images.forEach(img => {
+        // Create placeholder div
+        const placeholder = document.createElement('div');
+        placeholder.className = 'placeholder';
+        placeholder.style.backgroundImage = `url(${img.src}?size=small)`;
+        img.parentElement.insertBefore(placeholder, img);
+
+        // Load high quality image
+        const highResImage = new Image();
+        highResImage.src = img.src;
+        highResImage.onload = () => {
+            img.classList.add('loaded');
+            placeholder.classList.add('hidden');
+        };
+    });
+}
+
 function loading() {
     var tl = gsap.timeline();
 
@@ -54,7 +98,10 @@ function loading() {
     }, "endAnime");
 
     tl.to("#loader", {
-        display: "none"
+        display: "none",
+        onComplete: () => {
+            handleImageLoading();
+        }
         // at end we don't need the loader, just the main page
     });
 
